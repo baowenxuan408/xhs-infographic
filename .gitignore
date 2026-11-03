@@ -1,0 +1,24 @@
+# 运行产物，一律不入库
+*.log
+*.png
+*.jpg
+*.jpeg
+screenshots/
+logs/
+__pycache__/
+*.pyc
+*.tmp
+~$*
+
+# 每批的文案中间文件（examples/ 下的样例除外）
+copy_*.json
+
+# 凭据与登录态（即使误生成也绝不入库）
+*token*
+*credential*
+*auth*
+*.session
+
+# 系统文件
+.DS_Store
+Thumbs.db

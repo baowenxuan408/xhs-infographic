@@ -1,0 +1,6 @@
+* text=auto eol=lf
+
+# 二进制，绝不参与行尾转换
+*.docx binary
+*.png binary
+*.jpg binary
