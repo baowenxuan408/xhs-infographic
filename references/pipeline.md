@@ -184,6 +184,22 @@ python scripts/normalize_images.py --dir "C:/Users/baojiawen/Desktop/数据标�
 - **禁止镜像延展**（会把标题倒着翻出来，必废）
 - 打印三张的原尺寸 / 现尺寸 / 校验值，并检查互不相同
 
+### 归口后必做：放大查字，糊就锐化（2026-11-04 客户反馈"字体不清晰"）
+
+交付前把每张的**小字区域裁剪放大 3 倍**看一眼，发虚就上超采样锐化（尺寸不变）：
+
+```python
+from PIL import Image, ImageFilter, ImageEnhance
+im = Image.open('1.png').convert('RGB')
+up = im.resize((im.width*2, im.height*2), Image.LANCZOS)
+up = up.filter(ImageFilter.UnsharpMask(radius=2.2, percent=130, threshold=2))
+up = ImageEnhance.Contrast(up).enhance(1.04)
+up.resize(im.size, Image.LANCZOS).save('1.png')   # 缩回 864×1152
+```
+
+- 处理前后各出一张对比图确认：笔画变实、无白边/噪点才算过
+- 属于红线 10 允许的第④类「清晰度锐化」，不用汇报申请
+
 **交付标准**：命名只能 1/2/3 ｜ 3:4 ｜ jpg/png ｜ 全进 `桌面\数据标注`。
 
 ---
